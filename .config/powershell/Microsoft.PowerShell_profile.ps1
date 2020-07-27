@@ -1,4 +1,4 @@
-$hostname = [System.Environment]::MachineName
+$full_fqdn = [System.Net.Dns]::GetHostByName($env::computerName).HostName
 
 function Add-DirToPath ($dir) {
     if (Test-Path -Path $dir -PathType Container) {
@@ -40,7 +40,7 @@ if ($IsLinux) {
     $env:MATES_DIR = Join-Path "HOME" /.contacts/dzr/contacts
 
     function Prompt {
-        "${env:USER}@${hostname}: $(Get-Location) SYSTEM: > "
+        "$([Environment]::UserName)@${full_fqdn} :: $(Get-Location) :: CONSOLE > "
     }
 
     $Paths = @(
