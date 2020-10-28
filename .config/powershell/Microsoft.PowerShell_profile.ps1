@@ -63,10 +63,6 @@ if ($IsLinux) {
 
     $env:MATES_DIR = Join-Path "HOME" /.contacts/dzr/contacts
 
-    function Prompt {
-        "$([Environment]::UserName)@${full_fqdn} :: $(Get-Location) :: CONSOLE > "
-    }
-
     $Paths = @(
         "${env:NPM_PACKAGES}/bin",
         "${env:GOBIN}",
@@ -129,3 +125,9 @@ if ($IsLinux) {
         }
     }
 }
+
+Invoke-Expression (&starship init powershell)
+Invoke-Expression (& {
+    $hook = if ($PSVersionTable.PSVersion.Major -lt 6) { 'prompt' } else { 'pwd' }
+    (zoxide init --hook $hook powershell) -join "`n"
+})
