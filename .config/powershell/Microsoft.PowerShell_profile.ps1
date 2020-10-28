@@ -46,10 +46,6 @@ function Get-GitIgnore ($ignore) {
 }
 
 if ($IsLinux) {
-    $env:COMPLETION_SHELL_PREFERENCE = "/bin/zsh"
-
-    Import-Module Microsoft.PowerShell.UnixCompleters
-
     $env:PATH = "/sbin:/usr/sbin:/usr/local/sbin:/root/bin:/usr/local/bin:/usr/bin:/bin:/snap/bin"
 
     $env:SSH_AUTH_SOCK = Join-Path $env:XDG_RUNTIME_DIR /ssh/S.ssh-agent
